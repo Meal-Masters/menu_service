@@ -63,10 +63,14 @@ def get_all_ingredients():
 
 
 def create_ingredient(name, unit, stock_quantity=0):
-    pass
-
-
-def delete_ingredient(ingredient_id):
+    import sqlite3
+    db_file = 'my_database.db'
+    conn = sqlite3.connect(db_file)
+    cursor = conn.cursor()
+    query = "SELECT name, age FROM Students WHERE age > ?"
+    cursor.execute(query, name, unit, stock_quantity)
+   
+    def delete_ingredient(ingredient_id):
     pass
 
 
