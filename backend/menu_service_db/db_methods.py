@@ -1,5 +1,6 @@
 import sqlite3
-import os
+
+from tkinter import Menubutton
 
 DATABASE_PATH = "menu_service.db"
 
@@ -7,7 +8,7 @@ DATABASE_PATH = "menu_service.db"
 
 # conn = sqlite3.connect(DATABASE_PATH)
 # cursor = conn.cursor()
-# response = cursor.execute("SELECT ...")
+# response = cursor.execute()
 #
 # response.fetchone()
 # # OR
@@ -27,7 +28,19 @@ DATABASE_PATH = "menu_service.db"
 
 
 def get_all_dishes():
-    pass
+    quary = """SELECT * FROM Menu;
+    """
+    conn = sqlite3.connect(DATABASE_PATH)
+    cursor = conn.cursor()
+    response = cursor.execute(quary)
+
+    # return response.fetchone()
+    # OR
+    for item in response.fetchall():
+        print (item)
+
+    conn.close()
+
 
 
 def get_dish_by_id(dish_id):
@@ -87,4 +100,6 @@ def delete_dietary_attribute(attribute_id):
 if __name__ == '__main__':
     conn = sqlite3.connect(DATABASE_PATH)
     cursor = conn.cursor()
+    get_all_dishes()
+    # response.fetchall()
     conn.close()
