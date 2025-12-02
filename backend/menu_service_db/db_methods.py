@@ -59,7 +59,9 @@ def get_dish_extras(dish_id):
 
 
 def get_all_ingredients():
-    pass
+    cursor.execute("SELECT * from Ingredients")
+    ingredients = cursor.fetchall()
+    return ingredients
 
 
 def create_ingredient(name, unit, stock_quantity=0):
