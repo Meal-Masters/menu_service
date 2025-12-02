@@ -96,7 +96,6 @@ def delete_dietary_attribute(attribute_id):
 
 
 if __name__ == '__main__':
-    delete_ingredient(5)
     conn = sqlite3.connect(DATABASE_PATH)
     cursor = conn.cursor()
     conn.close()
