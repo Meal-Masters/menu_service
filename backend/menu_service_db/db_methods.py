@@ -39,8 +39,21 @@ def create_dish(name, description, price, category, is_available=True):
 
 
 def update_dish(dish_id, name, description, price, category, is_available):
-    pass
-
+    query = f"""
+    UPDATE Menu
+    SET
+    Dish_Name = '{name}',
+    Description = '{description}',
+    Dish_Price = {price},
+    Category = '{category}'
+    WHERE
+    Dish_ID = {dish_id};
+    """
+    conn = sqlite3.connect(DATABASE_PATH)
+    cursor = conn.cursor()
+    cursor.execute(query)
+    conn.commit()
+    conn.close()
 
 def delete_dish(dish_id):
     pass
