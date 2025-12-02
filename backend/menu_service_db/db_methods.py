@@ -69,10 +69,17 @@ def create_ingredient(name, unit, stock_quantity=0):
 def delete_ingredient(ingredient_id):
     pass
 
-
+## Maryam
 def get_all_dietary_attributes():
-    pass
+    conn = sqlite3.connect(DATABASE_PATH)
+    cursor = conn.cursor()
+    response = cursor.execute("""
+        SELECT *
+        FROM Dietary_Attributes
+    """)
+    rows = response.fetchall()
 
+    return rows
 
 def create_dietary_attribute(name, description=""):
     pass
