@@ -25,66 +25,13 @@ DATABASE_PATH = "menu_service.db"
 
 
 
-
-def get_all_dishes():
-    pass
-
-
-def get_dish_by_id(dish_id):
-    pass
-
-
-def create_dish(name, description, price, category, is_available=True):
-    pass
-
-
-def update_dish(dish_id, name, description, price, category, is_available):
-    pass
-
-
-def delete_dish(dish_id):
-    pass
-
-
-def get_dish_ingredients(dish_id):
-    pass
-
-
-def get_dish_dietary_attributes(dish_id):
-    pass
-
-
-def get_dish_extras(dish_id):
-    pass
-
-
-def get_all_ingredients():
-    pass
-
-
 def create_ingredient(name, unit, stock_quantity=0):
     query_1= create_ingredient(name, unit, stock_quantity=0)
     conn = sqlite3.connect(DATABASE_PATH)
     cursor = conn.cursor()
-    response = cursor.execute("INSERT query_1)
+    response = cursor.execute("INSERT query_1")
     conn.commit()
     conn.close()
-
-
-    def delete_ingredient(ingredient_id):
-    pass
-
-
-def get_all_dietary_attributes():
-    pass
-
-
-def create_dietary_attribute(name, description=""):
-    pass
-
-
-def delete_dietary_attribute(attribute_id):
-    pass
 
 
 
