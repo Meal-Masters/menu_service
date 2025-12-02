@@ -75,7 +75,24 @@ def get_all_dietary_attributes():
 
 
 def create_dietary_attribute(name, description=""):
-    pass
+    conn = sqlite3.connect(DATABASE_PATH)
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute("""
+            INSERT INTO dietary_attributes (name, description)
+            VALUES (?, ?)
+        """, (name, description))
+
+        conn.commit()
+        return cursor.lastrowid  # return the ID of the new row
+
+    except sqlite3.Error as e:
+        print("Database error:", e)
+        return None
+
+    finally:
+        conn.close()
 
 
 def delete_dietary_attribute(attribute_id):
