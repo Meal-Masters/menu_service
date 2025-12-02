@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🍽️ Menu Management System</h1>
+            <p class="subtitle">Manage your restaurant's dishes, ingredients, and dietary attributes</p>
+        </header>
+
+        <!-- Dishes Section -->
+        <section class="section" id="dishes-section">
+            <div class="section-header">
+                <h2>Dishes</h2>
+                <button class="btn btn-primary" id="add-dish-btn">+ Add Dish</button>
+            </div>
+
+            <!-- Add/Edit Dish Form -->
+            <div class="form-container" id="dish-form-container" style="display: none;">
+                <h3 id="dish-form-title">Add New Dish</h3>
+                <form id="dish-form">
+                    <input type="hidden" id="dish-id">
+                    <div class="form-group">
+                        <label for="dish-name">Dish Name *</label>
+                        <input type="text" id="dish-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dish-description">Description</label>
+                        <textarea id="dish-description" rows="3"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="dish-price">Price *</label>
+                            <input type="number" id="dish-price" step="0.01" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dish-category">Category *</label>
+                            <input type="text" id="dish-category" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="dish-available" checked>
+                            Available
+                        </label>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save Dish</button>
+                        <button type="button" class="btn btn-secondary" id="cancel-dish-btn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Dishes List -->
+            <div class="items-grid" id="dishes-list">
+                <div class="loading">Loading dishes...</div>
+            </div>
+        </section>
+
+        <!-- Ingredients Section -->
+        <section class="section" id="ingredients-section">
+            <div class="section-header">
+                <h2>Ingredients</h2>
+                <button class="btn btn-primary" id="add-ingredient-btn">+ Add Ingredient</button>
+            </div>
+
+            <!-- Add Ingredient Form -->
+            <div class="form-container" id="ingredient-form-container" style="display: none;">
+                <h3>Add New Ingredient</h3>
+                <form id="ingredient-form">
+                    <div class="form-group">
+                        <label for="ingredient-name">Ingredient Name *</label>
+                        <input type="text" id="ingredient-name" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="ingredient-unit">Unit *</label>
+                            <input type="text" id="ingredient-unit" placeholder="e.g., grams, liters" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ingredient-stock">Stock Quantity</label>
+                            <input type="number" id="ingredient-stock" min="0" value="0">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Add Ingredient</button>
+                        <button type="button" class="btn btn-secondary" id="cancel-ingredient-btn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Ingredients List -->
+            <div class="items-list" id="ingredients-list">
+                <div class="loading">Loading ingredients...</div>
+            </div>
+        </section>
+
+        <!-- Dietary Attributes Section -->
+        <section class="section" id="dietary-section">
+            <div class="section-header">
+                <h2>Dietary Attributes</h2>
+                <button class="btn btn-primary" id="add-dietary-btn">+ Add Attribute</button>
+            </div>
+
+            <!-- Add Dietary Attribute Form -->
+            <div class="form-container" id="dietary-form-container" style="display: none;">
+                <h3>Add New Dietary Attribute</h3>
+                <form id="dietary-form">
+                    <div class="form-group">
+                        <label for="dietary-name">Attribute Name *</label>
+                        <input type="text" id="dietary-name" placeholder="e.g., Vegetarian, Gluten-Free" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dietary-description">Description</label>
+                        <textarea id="dietary-description" rows="2"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Add Attribute</button>
+                        <button type="button" class="btn btn-secondary" id="cancel-dietary-btn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Dietary Attributes List -->
+            <div class="items-list" id="dietary-list">
+                <div class="loading">Loading dietary attributes...</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal for showing dish details -->
+    <div class="modal" id="dish-details-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-dish-name"></h2>
+            <div id="modal-dish-content"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
