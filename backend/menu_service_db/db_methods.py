@@ -78,7 +78,7 @@ def delete_ingredient(ingredient_id):
     response = cursor.execute(query_delete_ingredient)
     conn.commit()
     conn.close()
-    pass
+
 
 
 def get_all_dietary_attributes():
