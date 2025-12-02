@@ -50,8 +50,25 @@ def get_dish_ingredients(dish_id):
     pass
 
 
-def get_dish_dietary_attributes(dish_id):
-    pass
+def create_dietary_attribute(name, description=""):
+    conn = sqlite3.connect(DATABASE_PATH)
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute("""
+            INSERT INTO dietary_attributes (name, description)
+            VALUES (?, ?)
+        """, (name, description))
+
+        conn.commit()
+        return cursor.lastrowid  # return the ID of the new row
+
+    except sqlite3.Error as e:
+        print("Database error:", e)
+        return None
+
+    finally:
+        conn.close()
 
 
 def get_dish_extras(dish_id):
