@@ -80,7 +80,18 @@ def create_ingredient(name, unit, stock_quantity=0):
 
 
 def delete_ingredient(ingredient_id):
-    pass
+    conn = sqlite3.connect(DATABASE_PATH)
+    cursor = conn.cursor()
+
+    query_delete_ingredient = f"""
+    DELETE FROM Ingredients
+    WHERE Ingredient_ID = {ingredient_id}
+    """
+
+    response = cursor.execute(query_delete_ingredient)
+    conn.commit()
+    conn.close()
+
 
 ## Maryam
 def get_all_dietary_attributes():
