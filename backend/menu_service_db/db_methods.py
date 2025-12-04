@@ -30,8 +30,21 @@ def get_all_dishes():
     pass
 
 
-def get_dish_by_id(dish_id):
-    pass
+def get_dish_by_id(dish_id: int):
+    query = f"""SELECT * FROM Menu WHERE Dish_ID = {dish_id}"""
+
+    conn = sqlite3.connect(DATABASE_PATH)
+    cursor = conn.cursor()
+    response = cursor.execute(query)
+    fetched_res = response.fetchall()[0]
+    dish_info = {
+        "Dish_ID": fetched_res[0],
+        "Dish_Name": fetched_res[1],
+        "Description": fetched_res[2],
+        "Category": fetched_res[3],
+        "Dish_Price": fetched_res[4]
+    }
+    return dish_info
 
 
 def create_dish(name, description, price, category, is_available=True):
@@ -72,7 +85,9 @@ def get_dish_extras(dish_id):
 
 
 def get_all_ingredients():
-    pass
+    cursor.execute("SELECT * from Ingredients")
+    ingredients = cursor.fetchall()
+    return ingredients
 
 
 def create_ingredient(name, unit, stock_quantity=0):
