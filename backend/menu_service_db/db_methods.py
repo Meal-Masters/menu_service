@@ -55,7 +55,13 @@ def get_dish_dietary_attributes(dish_id):
 
 
 def get_dish_extras(dish_id):
-    pass
+    query = f"""SELECT * FROM DishExtras WHERE Dish_ID = {dish_id} """
+    conn = sqlite3 .connect(DATABASE_PATH)
+    cursor = conn.cursor()
+    response = cursor.execute(query)
+    fetched_res = response.fetchall()
+    dish_extra = f"""For dish {dish_id}, the extra is {fetched_res[0][1]} """
+    return dish_extra
 
 
 def get_all_ingredients():
@@ -85,6 +91,7 @@ def delete_dietary_attribute(attribute_id):
 
 
 if __name__ == '__main__':
-    conn = sqlite3.connect(DATABASE_PATH)
-    cursor = conn.cursor()
-    conn.close()
+    print(get_dish_extras(3))
+    # conn = sqlite3.connect(DATABASE_PATH)
+    # cursor = conn.cursor()
+    # conn.close()
