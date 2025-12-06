@@ -61,6 +61,7 @@ def get_dish_extras(dish_id):
     response = cursor.execute(query)
     fetched_res = response.fetchall()
     dish_extra = f"""For dish {dish_id}, the extra is {fetched_res[0][1]} """
+    conn.close()
     return dish_extra
 
 
