@@ -1,7 +1,5 @@
 import sqlite3
 
-from tkinter import Menubutton
-
 DATABASE_PATH = "menu_service.db"
 
 
@@ -52,8 +50,21 @@ def create_dish(name, description, price, category, is_available=True):
 
 
 def update_dish(dish_id, name, description, price, category, is_available):
-    pass
-
+    query = f"""
+    UPDATE Menu
+    SET
+    Dish_Name = '{name}',
+    Description = '{description}',
+    Dish_Price = {price},
+    Category = '{category}'
+    WHERE
+    Dish_ID = {dish_id};
+    """
+    conn = sqlite3.connect(DATABASE_PATH)
+    cursor = conn.cursor()
+    cursor.execute(query)
+    conn.commit()
+    conn.close()
 
 def delete_dish(dish_id):
     pass
@@ -82,13 +93,37 @@ def create_ingredient(name, unit, stock_quantity=0):
 def delete_ingredient(ingredient_id):
     pass
 
-
+## Maryam
 def get_all_dietary_attributes():
-    pass
+    conn = sqlite3.connect(DATABASE_PATH)
+    cursor = conn.cursor()
+    response = cursor.execute("""
+        SELECT *
+        FROM Dietary_Attributes
+    """)
+    rows = response.fetchall()
 
+    return rows
 
 def create_dietary_attribute(name, description=""):
-    pass
+    conn = sqlite3.connect(DATABASE_PATH)
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute("""
+            INSERT INTO dietary_attributes (name, description)
+            VALUES (?, ?)
+        """, (name, description))
+
+        conn.commit()
+        return cursor.lastrowid  # return the ID of the new row
+
+    except sqlite3.Error as e:
+        print("Database error:", e)
+        return None
+
+    finally:
+        conn.close()
 
 
 def delete_dietary_attribute(attribute_id):
@@ -100,6 +135,4 @@ def delete_dietary_attribute(attribute_id):
 if __name__ == '__main__':
     conn = sqlite3.connect(DATABASE_PATH)
     cursor = conn.cursor()
-    get_all_dishes()
-    # response.fetchall()
     conn.close()
