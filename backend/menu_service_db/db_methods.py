@@ -1,5 +1,4 @@
 import sqlite3
-import os
 
 DATABASE_PATH = "menu_service.db"
 
@@ -7,7 +6,7 @@ DATABASE_PATH = "menu_service.db"
 
 # conn = sqlite3.connect(DATABASE_PATH)
 # cursor = conn.cursor()
-# response = cursor.execute("SELECT ...")
+# response = cursor.execute()
 #
 # response.fetchone()
 # # OR
@@ -27,7 +26,19 @@ DATABASE_PATH = "menu_service.db"
 
 
 def get_all_dishes():
-    pass
+    quary = """SELECT * FROM Menu;
+    """
+    conn = sqlite3.connect(DATABASE_PATH)
+    cursor = conn.cursor()
+    response = cursor.execute(quary)
+
+    # return response.fetchone()
+    # OR
+    for item in response.fetchall():
+        print (item)
+
+    conn.close()
+
 
 
 def get_dish_by_id(dish_id):
